@@ -1,30 +1,39 @@
-.day {
-  border: 1px white solid;
-  height: 160px;
-  
+.day{
+  border: white 1px solid;
+  height: 100px;
 }
-.btnDiv{
+
+.notCurr{
+  font-size: 17px;
+  color:darkred
+}
+.numberBtn{
+  color: blueviolet;
+  font-size: 20px;
+}
+.numberBtnDiv{
   text-align: center;
-
 }
-.number{
-  display:inline;
-  margin-top: 10px;
-  background-color: transparent;
+
+button{
   color: white;
-  border: 1px transparent solid;
-  font-size: 30px;
-}
-.number:hover{
-  cursor: pointer;
-  background-color: blue
-}
-.number:active{
-  padding: 10px;
-  background-color: blue;
-}
-.list{
-  margin-top: 3px;
-  margin-bottom: 0;
+  border: transparent;
+  background-color: transparent;
 }
 
+button:hover{
+  cursor: pointer;
+}
+.buttonContainer button {
+  display: block;
+} 
+.currentDay{
+  width: 40px;
+    /* Breite des Buttons */
+    height: 40px;
+    /* Höhe des Buttons */
+    border-radius: 50%;
+    /* Erstellt einen Kreis, indem die Hälfte der Breite/Höhe als Radius verwendet wird */
+    border: 5px solid blue;
+
+}

@@ -1,10 +1,12 @@
 import Calendar from "./components/Calendar";
+import Head from "./components/Head";
 
 function App() {
   return (
-    <div>
+    <>
+      <Head />
       <Calendar />
-    </div>
+    </>
 
   );
 }

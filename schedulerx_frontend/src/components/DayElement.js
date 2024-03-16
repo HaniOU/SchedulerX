@@ -1,15 +1,19 @@
 import classes from "./DayElement.module.css"
-function DayElement({ day }) {
+function DayElement({ day, currentMonth, currentDay }) {
     return (
         <div className={classes.day}>
-            <div className={classes.btnDiv}>
-                <button  className={classes.number}>{day}</button>
+            <div className={classes.numberBtnDiv}>
+                <button
+                    className={`${currentMonth ? classes.numberBtn : classes.notCurr} ${currentDay ? classes.currentDay : ""}`}>
+                    {day}
+                </button>
+
+
             </div>
-            <ul className={classes.list}>
-                <li>Appointments</li>
-                <li>Activities</li>
-                <li>Notes</li>
-            </ul>
+            <div className={classes.buttonContainer}>
+                <button>⚪Appointments</button>
+                <button>⚪Notes</button>
+            </div>
         </div>
     );
 }

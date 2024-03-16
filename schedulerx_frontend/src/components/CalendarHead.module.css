@@ -1,78 +1,109 @@
-.month {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    font-size: 40px;
+.calendarHead {
+    position: relative;
+    height: 70px;
 }
 
+.month {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    padding-bottom: 2%;
+}
+
+.leftArrow {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding-bottom: 3%;
+}
+
+.rightArrow {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    right: 0;
+    padding-bottom: 3%;
+}
+
+.btn {
+    font-size: 40px;
+    border: transparent;
+    background-color: transparent;
+    padding: 0;
+}
+
+.btn:hover {
+
+    cursor: pointer;
+}
 
 .prevMonth {
     position: absolute;
-    left: 0;
-    margin-left: 20px;
+    padding-left: 3%;
+    bottom: 0;
+    margin: 10px;
     font-size: 25px;
-    top: 15%
+    padding-bottom: 3%;
 }
 
 .nextMonth {
     position: absolute;
     right: 0;
-    margin-right: 20px;
     font-size: 25px;
-    top: 15%
-}
-
-.leftArrow {
-    position: absolute;
-    left: 1%;
     bottom: 0;
-    font-size: 60px;
+    margin: 10px;
+    padding-right: 3%;
+    padding-bottom: 3%;
 }
 
-.rightArrow {
-    position: absolute;
-    right: 1%;
-    bottom: 0;
-    font-size: 60px;
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    height: 80px;
-}
-
-.head {
-    position: relative;
-    height: 100px;
-    ;
-}
-
-h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-
-}
-
-p {
+h5 {
+    font-size: 20px;
     margin: 0;
 }
 
-.greet {
-    left: 0;
+.monday {
     position: absolute;
-    margin-left: 350px;
-
+    padding-left: 4.5%;
+    bottom: 0;
 }
 
-.time {
-    right: 0;
+.tuesday {
+    bottom: 0;
     position: absolute;
-    margin-right: 350px
+    padding-left: 19%;
 }
-.subTitle{
-    height: 30px;
-    position: relative;
 
+.wednesday {
+    bottom: 0;
+    position: absolute;
+    padding-left: 32%;
+}
+
+.thursday {
+    bottom: 0;
+    position: absolute;
+    padding-left: 47%;
+}
+
+.friday {
+    position: absolute;
+    bottom: 0;
+    right:0;
+    padding-right:34%;
+}
+
+.saturday {
+    bottom: 0;
+    right:0;
+    padding-right: 19%;
+    position: absolute;
+}
+
+.sunday {
+    bottom: 0;
+    right:0;
+    padding-right: 4.5%;
+    position: absolute;
 }
