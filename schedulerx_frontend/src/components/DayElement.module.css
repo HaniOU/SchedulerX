@@ -1,0 +1,30 @@
+.day {
+  border: 1px white solid;
+  height: 160px;
+  
+}
+.btnDiv{
+  text-align: center;
+
+}
+.number{
+  display:inline;
+  margin-top: 10px;
+  background-color: transparent;
+  color: white;
+  border: 1px transparent solid;
+  font-size: 30px;
+}
+.number:hover{
+  cursor: pointer;
+  background-color: blue
+}
+.number:active{
+  padding: 10px;
+  background-color: blue;
+}
+.list{
+  margin-top: 3px;
+  margin-bottom: 0;
+}
+
