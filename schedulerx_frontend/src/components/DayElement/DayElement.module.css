@@ -1,0 +1,29 @@
+.day {
+  border: white 3px solid;
+  height: 100px;
+}
+
+.notCurr {
+  font-size: 20px;
+  color: rgb(105, 102, 102)
+}
+.numberBtn {
+  color: ol;
+  font-size: 23px;
+}
+
+.numberBtnDiv {
+  text-align: center;
+}
+
+.buttonContainer button {
+  display: block;
+}
+
+.currentDay {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 5px solid blue;
+
+}
