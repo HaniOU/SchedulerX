@@ -25,18 +25,26 @@ function App() {
   const [appointments, setAppointments] = useState(initialAppointments);
   const [selectedDay, setSelectedDay] = useState(0);
 
-  function handleAppointmentSubmit(time,activity,partner){
-    const newAppointment = {day:selectedDay, time: time, activity: activity, partner: partner};
-    setAppointments(prev => [...prev, newAppointment]);
+ 
+  function handleDayButton(day){
+    setSelectedDay(day);
+    setShowDayModal(true);
   }
-
   function handleAppointmentButton(day){
     setSelectedDay(day);
     setShowAppointmentModal(true);
   }
+  function handleNoteButton(day){
+    setSelectedDay(day);
+    setShowNoteModal(true);
+  }
   function handleNoteSubmit(note){
     const newNote ={day: selectedDay, noteText: note}
     setNotes(prev => [...prev,newNote]);
+  }
+  function handleAppointmentSubmit(time,activity,partner){
+    const newAppointment = {day:selectedDay, time: time, activity: activity, partner: partner};
+    setAppointments(prev => [...prev, newAppointment]);
   }
   function getCurrentAppointments(){
     const currentAppointments = appointments.filter(a => a.day === selectedDay);
@@ -47,21 +55,21 @@ function App() {
     const currentNotes = notes.filter(n => n.day === selectedDay);
     return currentNotes.length>0 ? currentNotes.map(data => data.noteText) : [];
   }
-  function handleNoteButton(day){
-    setSelectedDay(day);
-    setShowNoteModal(true);
-  }
+  
+   
   return (
     <>
       <Head />
       <Calendar
-        onDayButton={() => setShowDayModal(true)  }
+        onDayButton={handleDayButton}
         onAppointmentButton={handleAppointmentButton}
         onNoteButton={handleNoteButton}
         />
       {showDayModal &&
         <div className="overlay">
           <DayModal 
+          appointments={getCurrentAppointments()}
+          notes={getCurrentNotes()}
           onDayClose={() => setShowDayModal(false)} />
         </div>}
       {showAppointmentModal &&

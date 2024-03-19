@@ -7,7 +7,7 @@ function DayElement({ day, currentMonth, currentDay, onDayButton, onAppointmentB
     return (
             <div className={classes.day}>
                 <div className={classes.numberBtnDiv}>
-                    <button onClick={onDayButton}
+                    <button onClick={()=> onDayButton(day)}
                         className={`${currentMonth ? classes.numberBtn : classes.notCurr} ${currentDay ? classes.currentDay : ""}`}>
                         {day}
                     </button>

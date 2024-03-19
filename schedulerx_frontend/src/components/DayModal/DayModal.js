@@ -1,18 +1,25 @@
 import classes from "./DayModal.module.css"
-function DayModal({ onDayClose }) {        
+function DayModal({ onDayClose, appointments, notes }) {        
     return (
         <div className={classes.modal}>
             <button onClick={onDayClose} className={classes.close}>&times;</button>
             <h1 className={classes.title}>Overview </h1>
-            <h3>Appointments:  </h3>
-            <p>
-                13:00🕔    Dinner     with Max  <br />
-                17:30🕔    Cinema     with Moe<br />
-                23:00🕔    Gym        with Ilias <br />
-            </p>
-            <h3>Notes:</h3>
-            <p> I need to prepare for coming math exam,
-                goal is to atleast study for 2 hours today..</p  >
+            <h3>Current Appointments:  </h3>
+            <ul>
+                {appointments.map(a => {
+                    return (
+                        <li>
+                            <p>🕔{a.time} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
+                        </li>
+                    );
+
+
+                })}
+            </ul>
+            <h3>Current Notes:  </h3>
+            <ul>
+                {notes.map(n => <li>{n}</li>)}
+            </ul>
         </div>
     );
 }
