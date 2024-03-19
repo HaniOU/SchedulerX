@@ -6,7 +6,11 @@ import AppointmentModal from "./components/AppointmentModal/AppointmentModal";
 import NoteModal from "./components/NoteModal/NoteModal";
 
 
-const initialAppointments = [];
+const initialAppointments = [
+  {day:17, time:"10:00", activity:"Gym", partner:"Ilias"},
+  {day:17, time:"16:30", activity:"Dinner", partner:"Max"},
+  {day:11, time:"20:00", activity:"Cinema", partner:"Moe"}
+];
 const initialNotes = [
   {day:17, noteText:"I need to prepare for coming math exam, goal is to atleast study for 2 hours today.."},
   {day:17, noteText: "Text brother"},
@@ -18,12 +22,26 @@ function App() {
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [showNoteModal, setShowNoteModal] = useState(false);
   const [notes, setNotes] = useState(initialNotes)
+  const [appointments, setAppointments] = useState(initialAppointments);
   const [selectedDay, setSelectedDay] = useState(0);
 
-  
+  function handleAppointmentSubmit(time,activity,partner){
+    const newAppointment = {day:selectedDay, time: time, activity: activity, partner: partner};
+    setAppointments(prev => [...prev, newAppointment]);
+  }
+
+  function handleAppointmentButton(day){
+    setSelectedDay(day);
+    setShowAppointmentModal(true);
+  }
   function handleNoteSubmit(note){
-    const newData ={day: selectedDay, noteText: note}
-    setNotes(prev => [...prev,newData]);
+    const newNote ={day: selectedDay, noteText: note}
+    setNotes(prev => [...prev,newNote]);
+  }
+  function getCurrentAppointments(){
+    const currentAppointments = appointments.filter(a => a.day === selectedDay);
+    return currentAppointments.length > 0 ? currentAppointments : [];
+
   }
   function getCurrentNotes(){
     const currentNotes = notes.filter(n => n.day === selectedDay);
@@ -38,7 +56,7 @@ function App() {
       <Head />
       <Calendar
         onDayButton={() => setShowDayModal(true)  }
-        onAppointmentButton={() => setShowAppointmentModal(true)}
+        onAppointmentButton={handleAppointmentButton}
         onNoteButton={handleNoteButton}
         />
       {showDayModal &&
@@ -49,6 +67,8 @@ function App() {
       {showAppointmentModal &&
         <div className="overlay">
           <AppointmentModal 
+          appointments={getCurrentAppointments()}
+          onAppointmentSubmit={handleAppointmentSubmit}
           onAppointmentClose={() => setShowAppointmentModal(false)} />
         </div>}
       {showNoteModal &&

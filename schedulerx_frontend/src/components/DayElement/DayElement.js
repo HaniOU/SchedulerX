@@ -13,7 +13,7 @@ function DayElement({ day, currentMonth, currentDay, onDayButton, onAppointmentB
                     </button>
                 </div>
                 <div className={classes.buttonContainer}>
-                    <button onClick={onAppointmentButton}>⚪Appointments</button>
+                    <button onClick={() => onAppointmentButton(day)}>⚪Appointments</button>
                     <button onClick={() => onNoteButton(day)}>⚪Notes</button>
                 </div>
             </div>
