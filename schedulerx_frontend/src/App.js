@@ -4,16 +4,17 @@ import Head from "./components/Head/Head";
 import DayModal from "./components/DayModal/DayModal";
 import AppointmentModal from "./components/AppointmentModal/AppointmentModal";
 import NoteModal from "./components/NoteModal/NoteModal";
+import { isSameDay, isSameMonth, isSameYear } from "date-fns";
 
 const initialAppointments = [
-  { day: "17", time: "10:00", activity: "Gym", partner: "Ilias" },
-  { day: "17", time: "16:30", activity: "Dinner", partner: "Max" },
-  { day: "11", time: "20:00", activity: "Cinema", partner: "Moe" }
+  { date: new Date(2024, 2, 17, 10, 0), activity: "Gym", partner: "Ilias" },
+  { date: new Date(2024, 2, 17, 15, 30), activity: "Dinner", partner: "Max" },
+  { date: new Date(2024, 2, 11, 10, 0), activity: "Cinema", partner: "Moe" }
 ];
 const initialNotes = [
-  { day: "17", noteText: "I need to prepare for coming math exam, goal is to atleast study for 2 hours today.." },
-  { day: "17", noteText: "Text brother" },
-  { day: "26", noteText: "Buy eggs and chips" }
+  { date: new Date(2024, 2, 17), noteText: "I need to prepare for coming math exam, goal is to atleast study for 2 hours today.." },
+  { date: new Date(2024, 2, 17), noteText: "Text brother" },
+  { date: new Date(2024, 2, 26), noteText: "Buy eggs and chips" }
 ];
 
 function App() {
@@ -23,36 +24,39 @@ function App() {
   const [showNoteModal, setShowNoteModal] = useState(false);
   const [notes, setNotes] = useState(initialNotes)
   const [appointments, setAppointments] = useState(initialAppointments);
-  const [selectedDay, setSelectedDay] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(null);
 
 
-  function handleDayButton(day) {
-    setSelectedDay(day);
+  function handleDateButton(date) {
+    setSelectedDate(date);
     setShowDayModal(true);
   }
-  function handleAppointmentButton(day) {
-    setSelectedDay(day);
+  function handleAppointmentButton(date) {
+    setSelectedDate(date);
     setShowAppointmentModal(true);
   }
-  function handleNoteButton(day) {
-    setSelectedDay(day);
+  function handleNoteButton(date) {
+    setSelectedDate(date);
     setShowNoteModal(true);
   }
   function handleNoteSubmit(note) {
-    const newNote = { day: selectedDay, noteText: note }
+    const newNote = { date: selectedDate, noteText: note }
     setNotes(prev => [...prev, newNote]);
   }
   function handleAppointmentSubmit(time, activity, partner) {
-    const newAppointment = { day: selectedDay, time: time, activity: activity, partner: partner };
+    const newAppointment = { date: selectedDate, time: time, activity: activity, partner: partner };
     setAppointments(prev => [...prev, newAppointment]);
   }
+  function isSameDate(dateA, dateB) {
+    return (isSameDay(dateA, dateB) && isSameMonth(dateA, dateB) && isSameYear(dateA, dateB))
+}
   function getCurrentAppointments() {
-    const currentAppointments = appointments.filter(a => a.day === selectedDay);
+    const currentAppointments = appointments.filter(a =>isSameDate(a.date, selectedDate));
     return currentAppointments.length > 0 ? currentAppointments : [];
 
   }
   function getCurrentNotes() {
-    const currentNotes = notes.filter(n => n.day === selectedDay);
+    const currentNotes = notes.filter(n =>isSameDate(n.date, selectedDate));
     return currentNotes.length > 0 ? currentNotes.map(data => data.noteText) : [];
   }
 
@@ -60,13 +64,13 @@ function App() {
   return (
     <>
       <Head
-      
+
       />
       <Calendar
-        onDayButton={handleDayButton}
+        onDateButton={handleDateButton}
         onAppointmentButton={handleAppointmentButton}
         onNoteButton={handleNoteButton}
-      
+
       />
       {showDayModal &&
         <div className="overlay">
