@@ -5,9 +5,9 @@ import { format } from "date-fns";
 function Head() {
    const [currentTime, setCurrentTime] = useState(new Date());
 
-   setInterval(() => {
+   /*setInterval(() => {
       setCurrentTime(new Date());
-   }, 1000);
+   }, 1000); */
    return (
       <div className={classes.headContainer}>
          <h1 className={classes.title}>SchedulerX</h1>

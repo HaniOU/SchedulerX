@@ -15,13 +15,13 @@ function CalendarHead({currentDate, onButton}) {
             <h3 className={classes.nextMonth}>{nextMonth}</h3>
             <h4 className={classes.leftArrow}> <button  onClick={() => onButton(subMonths(currentDate, 1))} className={classes.btn}>⬅️</button> </h4>
             <h4 className={classes.rightArrow}><button onClick={() => onButton(addMonths(currentDate, 1))} className={classes.btn}>➡️</button> </h4>
+            <h5 className={classes.sunday}>Sunday</h5>
             <h5 className={classes.monday}>Monday</h5>
             <h5 className={classes.tuesday}>Tuesday</h5>
             <h5 className={classes.wednesday}>Wednesday</h5>
             <h5 className={classes.thursday}>Thursday</h5>
             <h5 className={classes.friday}>Friday</h5>
             <h5 className={classes.saturday}>Saturday</h5>
-            <h5 className={classes.sunday}>Sunday</h5>
         </div>
     );
 }

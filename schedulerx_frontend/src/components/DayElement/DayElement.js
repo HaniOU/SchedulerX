@@ -2,7 +2,7 @@
 import { format, isSameDay, isSameMonth, isSameYear, startOfToday } from "date-fns";
 import classes from "./DayElement.module.css"
 import { useState } from "react";
-function DayElement({ dayDate, onDateButton, onAppointmentButton, onNoteButton, today }) {
+function DayElement({ dayDate, onDateButton, onAppointmentButton, onNoteButton, currentDate }) {
 
     let day = format(dayDate, "d");
     
@@ -17,7 +17,7 @@ function DayElement({ dayDate, onDateButton, onAppointmentButton, onNoteButton, 
         <div className={classes.day}>
             <div className={classes.numberBtnDiv}>
                 <button onClick={() => onDateButton(dayDate)}
-                    className={`${isSameMonth(dayDate, today) ? classes.numberBtn : classes.notCurr} 
+                    className={`${isSameMonth(dayDate, currentDate) ? classes.numberBtn : classes.notCurr} 
                            ${isSameDate(actualDate, dayDate) && classes.currentDay}`}>
                     {day}
                 </button>

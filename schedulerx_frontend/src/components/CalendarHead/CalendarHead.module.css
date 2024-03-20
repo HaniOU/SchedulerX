@@ -64,46 +64,51 @@ h5 {
 }
 
 .monday {
-    position: absolute;
-    padding-left: 4.5%;
-    bottom: 0;
-}
-
-.tuesday {
+    
     bottom: 0;
     position: absolute;
     padding-left: 19%;
 }
 
-.wednesday {
+.tuesday {
+   
     bottom: 0;
     position: absolute;
     padding-left: 32%;
 }
 
-.thursday {
+.wednesday {
+    
     bottom: 0;
     position: absolute;
     padding-left: 47%;
 }
 
-.friday {
+.thursday {
+    
     position: absolute;
     bottom: 0;
     right:0;
     padding-right:34%;
 }
 
-.saturday {
+.friday {
+   
     bottom: 0;
     right:0;
     padding-right: 19%;
     position: absolute;
 }
 
-.sunday {
+.saturday {
     bottom: 0;
     right:0;
-    padding-right: 4.5%;
+    padding-right: 5%;
     position: absolute;
+}
+
+.sunday {
+    position: absolute;
+    padding-left: 5%;
+    bottom: 0;
 }
