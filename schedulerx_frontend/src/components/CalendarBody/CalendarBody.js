@@ -2,8 +2,8 @@ import { eachDayOfInterval, endOfMonth, endOfWeek,startOfMonth } from "date-fns"
 import DayElement from "../DayElement/DayElement";
 import classes from "./CalendarBody.module.css"
 
-function CalendarBody({onDateButton, onAppointmentButton, onNoteButton,today }) {
-    let days = eachDayOfInterval({start:startOfMonth(today), end: endOfWeek (endOfMonth(today))});
+function CalendarBody({onDateButton, onAppointmentButton, onNoteButton,currentDate }) {
+    let days = eachDayOfInterval({start:startOfMonth(currentDate), end: endOfWeek (endOfMonth(currentDate))});
     return (
         <div className={classes.calendarContainer}>
             {days.map((day) =>
@@ -12,7 +12,7 @@ function CalendarBody({onDateButton, onAppointmentButton, onNoteButton,today }) 
                     onDateButton={onDateButton}
                     onAppointmentButton={onAppointmentButton}
                     onNoteButton={onNoteButton}
-                    today = {today}
+                    currentDate = {currentDate}
                 />)}
         </div>
     );

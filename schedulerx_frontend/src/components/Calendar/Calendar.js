@@ -5,18 +5,18 @@ import CalendarHead from "../CalendarHead/CalendarHead";
 import classes from "./Calendar.module.css"
 import { useState } from "react";
 function Calendar({ onDateButton, onAppointmentButton, onNoteButton }) {
-    const[today, setToday] = useState(startOfToday());
+    const[currentDate, setCurrentDate] = useState(startOfToday());
     return (
         <>
             <CalendarHead
-            today = {today}           
-            onButton = {setToday} 
+            currentDate = {currentDate}           
+            onButton = {setCurrentDate} 
             />
             <CalendarBody
                 onDateButton={onDateButton}
                 onAppointmentButton={onAppointmentButton}
                 onNoteButton={onNoteButton}
-                today = {today}
+                currentDate = {currentDate}
                 />
         </>
     );
