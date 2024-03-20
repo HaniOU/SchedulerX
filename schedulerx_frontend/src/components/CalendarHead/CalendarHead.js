@@ -1,13 +1,20 @@
+import { addMonths, format, subMonths } from "date-fns";
 import classes from "./CalendarHead.module.css"
 
-function CalendarHead() {
+function CalendarHead({today, onButton}) {
+    
+
+    let currentMonthAndYear= format(today,"MMMM yyyy");
+    let previousMonth = format(subMonths(today, 1),"MMMM" );
+    let nextMonth = format(addMonths(today, 1),"MMMM");
+
     return (
         <div className={classes.calendarHead}>
-            <h2 className={classes.month}>MARCH 2024</h2>
-            <h3 className={classes.prevMonth}>FEBRUARY</h3>
-            <h3 className={classes.nextMonth}>APRIL</h3>
-            <h4 className={classes.leftArrow}> <button className={classes.btn}>⬅️</button> </h4>
-            <h4 className={classes.rightArrow}><button className={classes.btn}>➡️</button> </h4>
+            <h2 className={classes.month}>{currentMonthAndYear}</h2>
+            <h3 className={classes.prevMonth}>{previousMonth}</h3>
+            <h3 className={classes.nextMonth}>{nextMonth}</h3>
+            <h4 className={classes.leftArrow}> <button  onClick={() => onButton(subMonths(today, 1))} className={classes.btn}>⬅️</button> </h4>
+            <h4 className={classes.rightArrow}><button onClick={() => onButton(addMonths(today, 1))} className={classes.btn}>➡️</button> </h4>
             <h5 className={classes.monday}>Monday</h5>
             <h5 className={classes.tuesday}>Tuesday</h5>
             <h5 className={classes.wednesday}>Wednesday</h5>
