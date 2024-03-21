@@ -21,6 +21,7 @@ function Modal({ showDayModal, showAppointmentModal, showNoteModal, selectedDate
 
     const [appointments, setAppointments] = useState(initialAppointments);
     const [notes, setNotes] = useState(initialNotes)
+    
 
     function getCurrentAppointments() {
         const currentAppointments = appointments.filter(a => isSameDate(a.date, selectedDate));

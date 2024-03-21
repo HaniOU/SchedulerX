@@ -19,6 +19,9 @@
     font-size: 100px;
     padding-top: 0;
     padding-right: 25px;
+    color: white;
+    border: transparent;
+    background-color: transparent;
   }
 
   .title{
