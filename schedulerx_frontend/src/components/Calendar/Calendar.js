@@ -1,24 +1,26 @@
 
-import { startOfToday} from "date-fns";
+import { startOfToday } from "date-fns";
 import CalendarBody from "../CalendarBody/CalendarBody";
 import CalendarHead from "../CalendarHead/CalendarHead";
-import classes from "./Calendar.module.css"
 import { useState } from "react";
-function Calendar({ onDateButton, onAppointmentButton, onNoteButton }) {
-    const[currentDate, setCurrentDate] = useState(startOfToday());
+
+function Calendar() {
+
+    const [currentDate, setCurrentDate] = useState(startOfToday());
+
+    //setCurrentDate muss auch automatisch für neuen Monat getriggert werden!
+
     return (
         <>
             <CalendarHead
-            currentDate = {currentDate}           
-            onButton = {setCurrentDate} 
+                currentDate={currentDate}
+                setCurrentDate={setCurrentDate}
             />
             <CalendarBody
-                onDateButton={onDateButton}
-                onAppointmentButton={onAppointmentButton}
-                onNoteButton={onNoteButton}
-                currentDate = {currentDate}
-                />
+                currentDate={currentDate}
+            />
         </>
     );
 }
+
 export default Calendar;

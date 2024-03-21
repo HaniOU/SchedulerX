@@ -1,9 +1,12 @@
 import { useState } from "react";
 import classes from "./AppointmentModal.module.css"
+
 function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointments }) {
+
     const [time, setTime] = useState("");
     const [activity, setActivity] = useState("");
     const [partner, setPartner] = useState("");
+
     function handleSubmit(e) {
         e.preventDefault();
         if (!time || !activity || !partner) return
@@ -12,6 +15,7 @@ function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointment
         setTime("");
         setPartner("");
     }
+
     return (
         <div className={classes.modal}>
             <h3>New Appointment:</h3>
@@ -34,11 +38,10 @@ function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointment
                             <p>🕔{a.time} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
                         </li>
                     );
-
-
                 })}
             </ul>
         </div>
     );
 }
+
 export default AppointmentModal;

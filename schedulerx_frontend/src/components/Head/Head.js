@@ -4,8 +4,8 @@ import classes from "./Head.module.css";
 import { format } from "date-fns";
 function Head() {
    const [currentTime, setCurrentTime] = useState(new Date());
-
-   /*setInterval(() => {
+/*
+   setInterval(() => {
       setCurrentTime(new Date());
    }, 1000); */
    return (

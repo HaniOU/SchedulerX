@@ -2,13 +2,13 @@
 import { format, isSameDay, isSameMonth, isSameYear, startOfToday } from "date-fns";
 import classes from "./DayElement.module.css"
 import { useState } from "react";
-function DayElement({ dayDate, onDateButton, onAppointmentButton, onNoteButton, currentDate }) {
+
+function DayElement({ dayDate, onDayButton, onAppointmentButton, onNoteButton, currentDate }) {
 
     let day = format(dayDate, "d");
-    
-    
-    const [actualDate, setActualDate] = useState(startOfToday());
 
+    const [actualDate, setActualDate] = useState(startOfToday());
+    // setActualDate soll bei neuem Tag automatisch getriggert werden !
 
     function isSameDate(dateA, dateB) {
         return (isSameDay(dateA, dateB) && isSameMonth(dateA, dateB) && isSameYear(dateA, dateB))
@@ -16,7 +16,7 @@ function DayElement({ dayDate, onDateButton, onAppointmentButton, onNoteButton, 
     return (
         <div className={classes.day}>
             <div className={classes.numberBtnDiv}>
-                <button onClick={() => onDateButton(dayDate)}
+                <button onClick={() => onDayButton(dayDate)}
                     className={`${isSameMonth(dayDate, currentDate) ? classes.numberBtn : classes.notCurr} 
                            ${isSameDate(actualDate, dayDate) && classes.currentDay}`}>
                     {day}
@@ -29,4 +29,5 @@ function DayElement({ dayDate, onDateButton, onAppointmentButton, onNoteButton, 
         </div>
     );
 }
+
 export default DayElement;

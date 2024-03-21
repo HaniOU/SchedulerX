@@ -1,5 +1,5 @@
 import classes from "./DayModal.module.css"
-function DayModal({ onDayClose, appointments, notes }) {        
+function DayModal({ onDayClose, appointments, notes }) {
     return (
         <div className={classes.modal}>
             <button onClick={onDayClose} className={classes.close}>&times;</button>
