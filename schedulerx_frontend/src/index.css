@@ -20,8 +20,3 @@ body{
 button:hover {
   cursor: pointer;
 }
-button {
-  color: white;
-  border: transparent;
-  background-color: transparent;
-}

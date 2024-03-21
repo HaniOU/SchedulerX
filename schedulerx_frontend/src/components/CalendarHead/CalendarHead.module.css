@@ -112,3 +112,15 @@ h5 {
     padding-left: 5%;
     bottom: 0;
 }
+
+.backBtn{
+    display: flex;
+    margin-left: 84%;
+    margin-top: 0px;
+    background-color: rgb(43, 39, 39);
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: 2px white solid
+
+}

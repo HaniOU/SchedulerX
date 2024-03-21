@@ -1,4 +1,4 @@
-import { addMonths, format, subMonths } from "date-fns";
+import { addMonths, format, startOfToday, subMonths } from "date-fns";
 import classes from "./CalendarHead.module.css"
 
 function CalendarHead({ currentDate, setCurrentDate }) {
@@ -22,6 +22,7 @@ function CalendarHead({ currentDate, setCurrentDate }) {
             <h5 className={classes.thursday}>Thursday</h5>
             <h5 className={classes.friday}>Friday</h5>
             <h5 className={classes.saturday}>Saturday</h5>
+            <button onClick={()=>setCurrentDate(startOfToday())} className={classes.backBtn}> current date </button>
         </div>
     );
 }

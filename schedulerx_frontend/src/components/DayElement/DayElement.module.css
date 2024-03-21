@@ -5,11 +5,17 @@
 
 .notCurr {
   font-size: 20px;
-  color: rgb(105, 102, 102)
+  color: rgb(105, 102, 102);
+  border: transparent;
+  background-color: transparent;
+
 }
 .numberBtn {
   color: ol;
   font-size: 23px;
+  color: white;
+    border: transparent;
+    background-color: transparent;
 }
 
 .numberBtnDiv {
@@ -26,4 +32,9 @@
   border-radius: 50%;
   border: 5px solid blue;
 
+}
+.btns{
+  color: white;
+  border: transparent;
+  background-color: transparent;
 }

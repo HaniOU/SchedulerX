@@ -23,8 +23,8 @@ function DayElement({ dayDate, onDayButton, onAppointmentButton, onNoteButton, c
                 </button>
             </div>
             <div className={classes.buttonContainer}>
-                <button onClick={() => onAppointmentButton(dayDate)}>⚪Appointments</button>
-                <button onClick={() => onNoteButton(dayDate)}>⚪Notes</button>
+                <button onClick={() => onAppointmentButton(dayDate)} className={classes.btns}>⚪Appointments</button>
+                <button onClick={() => onNoteButton(dayDate)} className={classes.btns}>⚪Notes</button>
             </div>
         </div>
     );
