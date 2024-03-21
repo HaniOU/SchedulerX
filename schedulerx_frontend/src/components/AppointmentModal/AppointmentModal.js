@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./AppointmentModal.module.css"
+import { format } from "date-fns";
 
 function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointments }) {
 
@@ -15,7 +16,6 @@ function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointment
         setTime("");
         setPartner("");
     }
-
     return (
         <div className={classes.modal}>
             <h3>New Appointment:</h3>
@@ -35,7 +35,7 @@ function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointment
                 {appointments.map(a => {
                     return (
                         <li>
-                            <p>🕔{a.time} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
+                            <p>🕔{format(a.date, 'HH:mm')} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
                         </li>
                     );
                 })}

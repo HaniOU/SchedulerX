@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import classes from "./DayModal.module.css"
 function DayModal({ onDayClose, appointments, notes }) {
     return (
@@ -9,7 +10,7 @@ function DayModal({ onDayClose, appointments, notes }) {
                 {appointments.map(a => {
                     return (
                         <li>
-                            <p>🕔{a.time} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
+                            <p>🕔{format(a.date, 'HH:mm')} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
                         </li>
                     );
 

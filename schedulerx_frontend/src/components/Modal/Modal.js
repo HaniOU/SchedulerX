@@ -11,9 +11,9 @@ const initialAppointments = [
     { date: new Date(2024, 2, 11, 10, 0), activity: "Cinema", partner: "Moe" }
 ];
 const initialNotes = [
-    { date: new Date(2024, 2, 17), noteText: "I need to prepare for coming math exam, goal is to atleast study for 2 hours today.." },
-    { date: new Date(2024, 2, 17), noteText: "Text brother" },
-    { date: new Date(2024, 2, 26), noteText: "Buy eggs and chips" }
+    { date: new Date(2024, 2, 17), text: "I need to prepare for coming math exam, goal is to atleast study for 2 hours today.." },
+    { date: new Date(2024, 2, 17), text: "Text brother" },
+    { date: new Date(2024, 2, 26), text: "Buy eggs and chips" }
 ];
 
 
@@ -29,10 +29,10 @@ function Modal({ showDayModal, showAppointmentModal, showNoteModal, selectedDate
     }
     function getCurrentNotes() {
         const currentNotes = notes.filter(n => isSameDate(n.date, selectedDate));
-        return currentNotes.length > 0 ? currentNotes.map(data => data.noteText) : [];
+        return currentNotes.length > 0 ? currentNotes.map(data => data.text) : [];
     }
     function handleNoteSubmit(note) {
-        const newNote = { date: selectedDate, noteText: note }
+        const newNote = { date: selectedDate, text: note }
         setNotes(prev => [...prev, newNote]);
     }
     function handleAppointmentSubmit(time, activity, partner) {
