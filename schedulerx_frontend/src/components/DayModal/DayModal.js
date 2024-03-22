@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import classes from "./DayModal.module.css"
-function DayModal({ onDayClose, appointments, notes }) {
+function DayModal({ appointments, notes, onDayClose }) {
     return (
         <div className={classes.modal}>
             <button onClick={onDayClose} className={classes.close}>&times;</button>
@@ -13,8 +13,6 @@ function DayModal({ onDayClose, appointments, notes }) {
                             <p>🕔{format(a.date, 'HH:mm')} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
                         </li>
                     );
-
-
                 })}
             </ul>
             <h3>Current Notes:  </h3>

@@ -1,0 +1,32 @@
+.numberBtnDiv {
+    text-align: center;
+}
+
+.day {
+    border: white 3px solid;
+    height: 100px;
+}
+
+.notCurr {
+    font-size: 20px;
+    color: rgb(105, 102, 102);
+    border: transparent;
+    background-color: transparent;
+
+}
+
+.numberBtn {
+    color: ol;
+    font-size: 23px;
+    color: white;
+    border: transparent;
+    background-color: transparent;
+}
+
+.currentDay {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 5px solid blue;
+
+}

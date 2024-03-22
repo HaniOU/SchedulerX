@@ -2,26 +2,52 @@ import { useState } from "react";
 import classes from "./AppointmentModal.module.css"
 import { format } from "date-fns";
 
-function AppointmentModal({ onAppointmentClose, onAppointmentSubmit, appointments }) {
+function AppointmentModal({ onAppointmentClose, appointments }) {
 
-    const [time, setTime] = useState("");
+    const [date, setDate] = useState("");
     const [activity, setActivity] = useState("");
     const [partner, setPartner] = useState("");
-
-    function handleSubmit(e) {
+    
+    async function handleSubmit(e) {
         e.preventDefault();
-        if (!time || !activity || !partner) return
-        onAppointmentSubmit(time, activity, partner);
+        if (!date || !activity || !partner) return;
+    
+        const newAppointment = {
+            date: new Date(date).toISOString(),
+            activity: activity,
+            partner: partner
+        };
+    
+        try {
+            const response = await fetch("/api/v1/addAppointment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newAppointment)
+            });
+    
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+  
+            console.log("Appointment added successfully");
+    
+        } catch (error) {
+            console.error("Error adding appointment:", error);
+        }
+   
         setActivity("");
-        setTime("");
+        setDate("");
         setPartner("");
     }
+    
     return (
         <div className={classes.modal}>
             <h3>New Appointment:</h3>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="time">🕔 At: </label>
-                <input type="text" id="time" placeholder="09:30" value={time} onChange={(e) => setTime(e.target.value)} /> <br />
+                <label htmlFor="date">🕔 At: </label>
+                <input type="text" id="date" placeholder="09:30" value={date} onChange={(e) => setDate(e.target.value)} /> <br />
                 <label htmlFor="content">🌍 Activity: </label>
                 <input type="text" id="activity" placeholder="Brunch" value={activity} onChange={(e) => setActivity(e.target.value)} /> <br />
                 <label htmlFor="who">🙆‍♂️ With: </label>

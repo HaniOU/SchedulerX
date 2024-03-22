@@ -1,61 +1,78 @@
-
-import { format, isSameDay, isSameMonth, isSameYear, startOfToday } from "date-fns";
-import classes from "./DayElement.module.css"
+import Day from "../Day/Day";
+import Appointment from "../Appointment/Appointment";
+import Note from "../Note/Note";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
-
+import { format } from "date-fns";
+import classes from "./DayElement.module.css"
 
 function DayElement({ dayDate, currentDate }) {
+    const [appointments, setAppointments] = useState([]);
+    const [notes, setNotes] = useState([]);
 
-    let day = format(dayDate, "d");
-    const [showDayModal, setShowDayModal] = useState(false);
-    const [showAppointmentModal, setShowAppointmentModal] = useState(false);
-    const [showNoteModal, setShowNoteModal] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [actualDate, setActualDate] = useState(startOfToday());
-    // setActualDate soll bei neuem Tag automatisch getriggert werden !
+    async function fetchAppointments() {
+        try {
+            const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
 
-    function handleDayButton(date) {
-        setSelectedDate(date);
-        setShowDayModal(true);
+            const transformedAppointments = data.map(appointment => ({
+                ...appointment,
+                date: new Date(appointment.date)
+            }));
+    
+            setAppointments(transformedAppointments);
+        } catch (error) {
+            console.error("Error fetching appointments:", error);
+        }
     }
-    function handleAppointmentButton(date) {
-        setSelectedDate(date);
-        setShowAppointmentModal(true);
+    
+    async function fetchNotes() {
+        try {
+            const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+    
+            const transformedNotes = data.map(note => ({
+                ...note,
+                date: new Date(note.date)
+            }));
+    
+            setNotes(transformedNotes);
+        } catch (error) {
+            console.error("Error fetching notes:", error);
+        }
+        console.log(notes);
+        
     }
-    function handleNoteButton(date) {
-        setSelectedDate(date);
-        setShowNoteModal(true);
-    }
-    function isSameDate(dateA, dateB) {
-        return (isSameDay(dateA, dateB) && isSameMonth(dateA, dateB) && isSameYear(dateA, dateB))
-    }
+    
+
     return (
-        <>
-            <div className={classes.day}>
-                <div className={classes.numberBtnDiv}>
-                    <button onClick={() => handleDayButton(dayDate)}
-                        className={`${isSameMonth(dayDate, currentDate) ? classes.numberBtn : classes.notCurr} 
-                           ${isSameDate(actualDate, dayDate) && classes.currentDay}`}>
-                        {day}
-                    </button>
-                </div>
-                <div className={classes.buttonContainer}>
-                    <button onClick={() => handleAppointmentButton(dayDate)} className={classes.btns}>⚪Appointments</button>
-                    <button onClick={() => handleNoteButton(dayDate)} className={classes.btns}>⚪Notes</button>
-                </div>
-            </div>
-            <Modal
-                showDayModal={showDayModal}
-                showAppointmentModal={showAppointmentModal}
-                showNoteModal={showNoteModal}
-                selectedDate={selectedDate}
-                setShowDayModal={setShowDayModal}
-                setShowAppointmentModal={setShowAppointmentModal}
-                setShowNoteModal={setShowNoteModal}
+        <div className={classes.container}>
+            <Day
+                currentDate={currentDate}
+                dayDate={dayDate}
+                fetchAppointments={fetchAppointments}
+                fetchNotes={fetchNotes}
+                appointments={appointments}
+                notes={notes}
             />
-        </>
+            <Appointment
+                
+                fetchAppointments={fetchAppointments}
+                appointments={appointments}
 
+            />
+            <Note
+              
+                fetchNotes={fetchNotes}
+                notes={notes}
+
+            />
+        </div>
     );
 }
 

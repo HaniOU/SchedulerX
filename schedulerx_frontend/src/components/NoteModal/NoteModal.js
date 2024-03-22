@@ -1,18 +1,40 @@
 import { useState } from "react";
 import classes from "./NoteModal.module.css"
 
-function NoteModal({ onNoteClose, notes, onNoteSubmit }) {
+function NoteModal({ onNoteClose, notes}) {
 
     const [note, setNote] = useState("")
+   
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        if (!note) return
-
-        onNoteSubmit(note);
+        if (!note) return;
+    
+        const newNote = {
+            text: note
+        };
+    
+        try {
+            const response = await fetch("/api/v1/addNote", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newNote)
+            });
+    
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+    
+            console.log("Note added successfully");
+    
+        } catch (error) {
+            console.error("Error adding note:", error);
+        }
         setNote("");
     }
-
+    
     return (
         <div className={classes.modal}>
             <button onClick={onNoteClose} className={classes.close}>&times;</button>
