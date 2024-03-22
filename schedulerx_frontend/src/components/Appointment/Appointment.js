@@ -10,13 +10,13 @@ const initialAppointments = [
     { date: new Date(2024, 2, 11, 10, 0), activity: "Cinema", partner: "Moe" }
 ];
 
-function Appointment({  fetchAppointments, appointments }) {
+function Appointment({ fetchAppointments, appointments, dayDate }) {
 
     const [showAppointmentModal, setShowAppointmentModal] = useState(false);
-  
+
 
     function handleAppointmentButton() {
-      
+
         fetchAppointments();
 
         setShowAppointmentModal(true);
@@ -26,8 +26,10 @@ function Appointment({  fetchAppointments, appointments }) {
         <>
             <button onClick={handleAppointmentButton} className={classes.button}>⚪Appointments</button>
             {showAppointmentModal &&
-               ReactDOM.createPortal( <div className="overlay">
+                ReactDOM.createPortal(<div className="overlay">
                     <AppointmentModal
+                        dayDate={dayDate}
+                        fetchAppointments={fetchAppointments}
                         appointments={appointments}
                         onAppointmentClose={() => setShowAppointmentModal(false)} />
                 </div>, document.body

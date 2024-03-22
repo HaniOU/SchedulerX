@@ -30,22 +30,21 @@ function DayElement({ dayDate, currentDate }) {
     
     async function fetchNotes() {
         try {
-            const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+            const response = await fetch(`http://localhost:8080/api/v1/notes/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
             const data = await response.json();
-    
+            
             const transformedNotes = data.map(note => ({
                 ...note,
                 date: new Date(note.date)
             }));
-    
+            
             setNotes(transformedNotes);
         } catch (error) {
             console.error("Error fetching notes:", error);
         }
-        console.log(notes);
         
     }
     
@@ -64,12 +63,16 @@ function DayElement({ dayDate, currentDate }) {
                 
                 fetchAppointments={fetchAppointments}
                 appointments={appointments}
+                dayDate={dayDate}
+
 
             />
             <Note
               
                 fetchNotes={fetchNotes}
                 notes={notes}
+                dayDate={dayDate}
+
 
             />
         </div>

@@ -3,32 +3,29 @@ import { useState } from "react";
 import classes from "./Note.module.css"
 import ReactDOM from "react-dom";
 
+//beispiel note { date: new Date(2024, 2, 26), text: "Buy eggs and chips" }
 
-const initialNotes = [
-    { date: new Date(2024, 2, 17), text: "I need to prepare for coming math exam, goal is to atleast study for 2 hours today.." },
-    { date: new Date(2024, 2, 17), text: "Text brother" },
-    { date: new Date(2024, 2, 26), text: "Buy eggs and chips" }
-];
-
-function Note({ fetchNotes, notes }) {
+function Note({ fetchNotes, notes, dayDate }) {
 
     const [showNoteModal, setShowNoteModal] = useState(false);
-   
+
 
     function handleNoteButton() {
-       
+
         fetchNotes();
 
         setShowNoteModal(true);
     }
-   
+
 
     return (
         <>
             <button onClick={handleNoteButton} className={classes.button}>⚪Notes</button>
             {showNoteModal &&
-               ReactDOM.createPortal( <div className="overlay">
+                ReactDOM.createPortal(<div className="overlay">
                     <NoteModal
+                        dayDate={dayDate}
+                        fetchNotes={fetchNotes}
                         notes={notes}
                         onNoteClose={() => setShowNoteModal(false)} />
                 </div>, document.body

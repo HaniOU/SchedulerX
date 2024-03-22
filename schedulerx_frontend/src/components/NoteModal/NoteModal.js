@@ -1,21 +1,26 @@
 import { useState } from "react";
 import classes from "./NoteModal.module.css"
+import { format } from "date-fns";
 
-function NoteModal({ onNoteClose, notes}) {
+function NoteModal({ onNoteClose, notes, dayDate, fetchNotes}) {
 
     const [note, setNote] = useState("")
-   
+  
+    
+    const formattedDate = format(dayDate, "yyyy-MM-dd'T'HH:mm");
+
 
     async function handleSubmit(e) {
         e.preventDefault();
         if (!note) return;
     
         const newNote = {
+            date: formattedDate,
             text: note
         };
     
         try {
-            const response = await fetch("/api/v1/addNote", {
+            const response = await fetch("http://localhost:8080/api/v1/addNote", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -32,6 +37,10 @@ function NoteModal({ onNoteClose, notes}) {
         } catch (error) {
             console.error("Error adding note:", error);
         }
+
+        fetchNotes();
+
+
         setNote("");
     }
     
@@ -46,7 +55,7 @@ function NoteModal({ onNoteClose, notes}) {
             </form>
             <h3>Current Notes:  </h3>
             <ul>
-                {notes.map(n => <li>{n}</li>)}
+                {notes.map(n => <li>{n.text}</li>)}
             </ul>
         </div>
     );

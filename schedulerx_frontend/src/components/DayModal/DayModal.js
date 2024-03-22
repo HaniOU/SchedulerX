@@ -17,7 +17,7 @@ function DayModal({ appointments, notes, onDayClose }) {
             </ul>
             <h3>Current Notes:  </h3>
             <ul>
-                {notes.map(n => <li>{n}</li>)}
+                {notes.map(n => <li>{n.text}</li>)}
             </ul>
         </div>
     );

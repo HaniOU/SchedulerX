@@ -2,7 +2,7 @@ import { useState } from "react";
 import classes from "./AppointmentModal.module.css"
 import { format } from "date-fns";
 
-function AppointmentModal({ onAppointmentClose, appointments }) {
+function AppointmentModal({ onAppointmentClose, appointments, dayDate, fetchAppointments }) {
 
     const [date, setDate] = useState("");
     const [activity, setActivity] = useState("");
@@ -11,15 +11,16 @@ function AppointmentModal({ onAppointmentClose, appointments }) {
     async function handleSubmit(e) {
         e.preventDefault();
         if (!date || !activity || !partner) return;
+        const formattedDate = format(dayDate, "yyyy-MM-dd'T'HH:mm");
     
         const newAppointment = {
-            date: new Date(date).toISOString(),
+            date: formattedDate,
             activity: activity,
             partner: partner
         };
     
         try {
-            const response = await fetch("/api/v1/addAppointment", {
+            const response = await fetch("http://localhost:8080/api/v1/addAppointment", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -36,7 +37,7 @@ function AppointmentModal({ onAppointmentClose, appointments }) {
         } catch (error) {
             console.error("Error adding appointment:", error);
         }
-   
+        fetchAppointments();
         setActivity("");
         setDate("");
         setPartner("");
