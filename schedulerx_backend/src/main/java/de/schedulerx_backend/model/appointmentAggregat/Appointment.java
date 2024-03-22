@@ -17,4 +17,20 @@ public class Appointment {
         this.activity = activity;
         this.partner = partner;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public String getPartner() {
+        return partner;
+    }
 }

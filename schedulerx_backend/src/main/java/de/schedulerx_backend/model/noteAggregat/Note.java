@@ -15,4 +15,16 @@ public class Note {
         this.date = date;
         this.text = text;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public String getText() {
+        return text;
+    }
 }
