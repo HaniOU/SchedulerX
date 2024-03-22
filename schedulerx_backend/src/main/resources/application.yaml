@@ -3,5 +3,5 @@ spring:
     banner-mode: off
   datasource:
     username: hani
-    password: ${DB_SECRET}
+    password: haniamir123
     url: jdbc:postgresql://localhost:5432/schedulerx
