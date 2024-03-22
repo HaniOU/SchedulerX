@@ -4,4 +4,4 @@ spring:
   datasource:
     username: hani
     password: haniamir123
-    url: jdbc:postgresql://localhost:5432/schedulerx
+    url: jdbc:postgresql://localhost:5432/${DB_SECRET}

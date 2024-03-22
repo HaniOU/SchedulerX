@@ -9,4 +9,4 @@ services:
     environment:
       - "POSTGRES_DB=schedulerx"
       - "POSTGRES_USER=hani"
-      - "POSTGRES_PASSWORD=haniamir123"
+      - "POSTGRES_PASSWORD=${DB_SECRET}"

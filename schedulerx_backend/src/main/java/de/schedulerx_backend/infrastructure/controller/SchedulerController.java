@@ -28,11 +28,11 @@ public class SchedulerController {
         return service.getNotes(date);
     }
     @PostMapping("api/v1/addAppointment")
-    public void addAppointment(@RequestBody Appointment appointment){
+    public void addAppointment(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Appointment appointment){
         service.saveAppointment(appointment);
     }
     @PostMapping("api/v1/addNote")
-    public void addAppointment(@RequestBody Note note){
+    public void addNote(@RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Note note){
         service.saveNote(note);
     }
 }

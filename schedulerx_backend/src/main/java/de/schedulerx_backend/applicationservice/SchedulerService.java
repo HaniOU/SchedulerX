@@ -25,7 +25,7 @@ public class SchedulerService {
                 appointmentRepository
                         .findAll()
                         .stream()
-                        .filter(a->a.getDate().equals(date))
+                        .filter(a-> isSameDate(a.getDate(),date))
                         .collect(Collectors.toList());
         return appointments;
     }
@@ -35,11 +35,13 @@ public class SchedulerService {
                 noteRepository
                         .findAll()
                         .stream()
-                        .filter(n->n.getDate().equals(date))
+                        .filter(n-> isSameDate(n.getDate(),date))
                         .collect(Collectors.toList());
         return notes;
     }
-
+    public static boolean isSameDate(LocalDateTime a, LocalDateTime b){
+        return (a.getYear() == b.getYear() && a.getMonth() == b.getMonth() && a.getDayOfMonth() == b.getDayOfMonth());
+    }
     public void saveAppointment(Appointment appointment) {
         appointmentRepository.save(appointment);
     }
