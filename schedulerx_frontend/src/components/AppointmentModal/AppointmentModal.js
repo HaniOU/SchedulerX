@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classes from "./AppointmentModal.module.css"
-import { format } from "date-fns";
+import { addHours, format, setHours, setMinutes } from "date-fns";
 
 function AppointmentModal({ onAppointmentClose, appointments, dayDate, fetchAppointments }) {
 
@@ -11,10 +11,12 @@ function AppointmentModal({ onAppointmentClose, appointments, dayDate, fetchAppo
     async function handleSubmit(e) {
         e.preventDefault();
         if (!date || !activity || !partner) return;
-        const formattedDate = format(dayDate, "yyyy-MM-dd'T'HH:mm");
-    
+        const [hours, minutes] = date.split(':');
+        const newDate = new Date(dayDate.getFullYear(), dayDate.getMonth(), dayDate.getDate(), hours, minutes);
+        newDate.setHours(newDate.getHours() + 1);
+
         const newAppointment = {
-            date: formattedDate,
+            date: newDate.toISOString(),
             activity: activity,
             partner: partner
         };
@@ -48,7 +50,7 @@ function AppointmentModal({ onAppointmentClose, appointments, dayDate, fetchAppo
             <h3>New Appointment:</h3>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="date">🕔 At: </label>
-                <input type="text" id="date" placeholder="09:30" value={date} onChange={(e) => setDate(e.target.value)} /> <br />
+                <input type="time" id="date" placeholder="09:30" value={date} onChange={(e) => setDate(e.target.value)} /> <br />
                 <label htmlFor="content">🌍 Activity: </label>
                 <input type="text" id="activity" placeholder="Brunch" value={activity} onChange={(e) => setActivity(e.target.value)} /> <br />
                 <label htmlFor="who">🙆‍♂️ With: </label>

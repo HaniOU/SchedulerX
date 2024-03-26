@@ -1,7 +1,7 @@
 .calendarContainer {
-  height: 500px;
+  height: 700px;
   display: grid;
   grid-template-columns: repeat(7,1fr);
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0;
+  border: 3px solid hsl(232.7, 27.3%, 23.7%);
 }
