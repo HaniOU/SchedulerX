@@ -2,11 +2,6 @@
     text-align: center;
 }
 
-.day {
-    
-    height: 100px;
-}
-
 .notCurr {
     font-size: 20px;
     color: rgb(105, 102, 102);
@@ -16,7 +11,6 @@
 }
 
 .numberBtn {
-    color: ol;
     font-size: 23px;
     color: white;
     border: transparent;

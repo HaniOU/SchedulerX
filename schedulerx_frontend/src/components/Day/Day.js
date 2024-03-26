@@ -4,10 +4,10 @@ import classes from "./Day.module.css"
 import DayModal from "../DayModal/DayModal";
 import ReactDOM from "react-dom";
 
-function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments,notes }) {
+function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments, notes }) {
     const [showDayModal, setShowDayModal] = useState(false);
     const [actualDate, setActualDate] = useState(startOfToday());
-   
+
 
     let day = format(dayDate, "d");
 
@@ -15,7 +15,7 @@ function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments
         fetchAppointments();
         fetchNotes();
         setShowDayModal(true);
-    } 
+    }
 
     function isSameDate(dateA, dateB) {
         return (isSameDay(dateA, dateB) && isSameMonth(dateA, dateB) && isSameYear(dateA, dateB))
@@ -23,17 +23,14 @@ function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments
 
     return (
         <>
-        <div className={classes.day}>
             <div className={classes.numberBtnDiv}>
                 <button onClick={handleDayButton}
                     className={`${isSameMonth(dayDate, currentDate) ? classes.numberBtn : classes.notCurr} 
-                   ${isSameDate(actualDate, dayDate) && classes.currentDay}`}>
+                   ${isSameDate(actualDate, dayDate) && classes.currentDay} `}>
                     {day}
                 </button>
             </div>
-            
-        </div>
-        {showDayModal &&
+            {showDayModal &&
                 ReactDOM.createPortal(
                     <div className="overlay">
                         <DayModal
@@ -44,7 +41,7 @@ function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments
                     document.body
                 )}
         </>
-        
+
     );
 }
 

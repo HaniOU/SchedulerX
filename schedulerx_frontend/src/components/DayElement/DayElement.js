@@ -50,7 +50,7 @@ function DayElement({ dayDate, currentDate }) {
     
 
     return (
-        <div className={classes.container}>
+        <>
             <Day
                 currentDate={currentDate}
                 dayDate={dayDate}
@@ -75,7 +75,7 @@ function DayElement({ dayDate, currentDate }) {
 
 
             />
-        </div>
+        </>
     );
 }
 

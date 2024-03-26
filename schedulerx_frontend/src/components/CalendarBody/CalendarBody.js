@@ -10,10 +10,11 @@ function CalendarBody({ currentDate }) {
     return (
         <div className={classes.calendarContainer}>
             {days.map((day) =>
-                <DayElement
+                <div className={classes.day}><DayElement
                     dayDate={day}
                     currentDate={currentDate}
-                />)}
+                /></div>
+               ) }
         </div>
     );
 }
