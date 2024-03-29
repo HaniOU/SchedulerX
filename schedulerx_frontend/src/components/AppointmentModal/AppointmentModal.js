@@ -1,12 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./AppointmentModal.module.css"
 import { addHours, format, setHours, setMinutes } from "date-fns";
 
-function AppointmentModal({ onAppointmentClose, appointments, dayDate, fetchAppointments }) {
+function AppointmentModal({ onAppointmentClose, dayDate}) {
 
     const [date, setDate] = useState("");
     const [activity, setActivity] = useState("");
     const [partner, setPartner] = useState("");
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => fetchAppointments,[]);
+
+    async function fetchAppointments() {
+        try {
+            const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+
+            const transformedAppointments = data.map(appointment => ({
+                ...appointment,
+                date: new Date(appointment.date)
+            }));
+    
+            setAppointments(transformedAppointments);
+        } catch (error) {
+            console.error("Error fetching appointments:", error);
+        }
+    }
+
+
     
     async function handleSubmit(e) {
         e.preventDefault();
@@ -33,13 +57,13 @@ function AppointmentModal({ onAppointmentClose, appointments, dayDate, fetchAppo
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
-  
+            setAppointments(prevApp => [...prevApp, newAppointment]);
             console.log("Appointment added successfully");
     
         } catch (error) {
             console.error("Error adding appointment:", error);
         }
-        fetchAppointments();
+        
         setActivity("");
         setDate("");
         setPartner("");

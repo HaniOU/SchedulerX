@@ -1,11 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./NoteModal.module.css"
 import { format } from "date-fns";
 
-function NoteModal({ onNoteClose, notes, dayDate, fetchNotes}) {
+function NoteModal({ onNoteClose, dayDate}) {
 
     const [note, setNote] = useState("")
-  
+    const [notes, setNotes] = useState([]);
+    
+    useEffect(() => fetchNotes, []);
+
+    async function fetchNotes() {
+        try {
+            const response = await fetch(`http://localhost:8080/api/v1/notes/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            
+            const transformedNotes = data.map(note => ({
+                ...note,
+                date: new Date(note.date)
+            }));
+            
+            setNotes(transformedNotes);
+        } catch (error) {
+            console.error("Error fetching notes:", error);
+        }
+       
+        
+    }
+
     
     const formattedDate = format(dayDate, "yyyy-MM-dd'T'HH:mm");
 
@@ -31,16 +55,13 @@ function NoteModal({ onNoteClose, notes, dayDate, fetchNotes}) {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
-    
+            setNotes(prevNotes => [...prevNotes, newNote]);
             console.log("Note added successfully");
     
         } catch (error) {
             console.error("Error adding note:", error);
         }
-
-        fetchNotes();
-
-
+       
         setNote("");
     }
     

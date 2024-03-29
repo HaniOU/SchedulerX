@@ -1,19 +1,31 @@
-import { isSameDay, isSameMonth, isSameYear, format, startOfToday } from "date-fns";
-import { useState } from "react";
+import { isSameDay, isSameMonth, isSameYear, format, startOfToday, startOfDay } from "date-fns";
+import { useEffect, useState } from "react";
 import classes from "./Day.module.css"
 import DayModal from "../DayModal/DayModal";
 import ReactDOM from "react-dom";
 
-function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments, notes }) {
+function Day({ currentDate, dayDate }) {
     const [showDayModal, setShowDayModal] = useState(false);
     const [actualDate, setActualDate] = useState(startOfToday());
+    useEffect(() => {
+        const midnightDate = startOfDay(new Date());
 
+        const millisecondsUntilMidnight = midnightDate.getTime() - Date.now();
+
+  
+        const timeoutId = setTimeout(() => {
+            setActualDate(midnightDate);
+        }, millisecondsUntilMidnight);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [])
 
     let day = format(dayDate, "d");
 
     function handleDayButton() {
-        fetchAppointments();
-        fetchNotes();
+     
         setShowDayModal(true);
     }
 
@@ -34,8 +46,7 @@ function Day({ currentDate, dayDate, fetchAppointments, fetchNotes, appointments
                 ReactDOM.createPortal(
                     <div className="overlay">
                         <DayModal
-                            appointments={appointments}
-                            notes={notes}
+                            dayDate = {dayDate}
                             onDayClose={() => setShowDayModal(false)} />
                     </div>,
                     document.body
