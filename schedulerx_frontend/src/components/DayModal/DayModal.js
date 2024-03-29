@@ -5,13 +5,15 @@ function DayModal({ onDayClose, dayDate }) {
 
     const [appointments, setAppointments] = useState([]);
     const [notes, setNotes] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         fetchAppointments();
         fetchNotes();
-    }, [dayDate]);
+    }, []);
 
     async function fetchAppointments() {
+        setIsLoading(true);
         try {
             const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
             if (!response.ok) {
@@ -27,10 +29,14 @@ function DayModal({ onDayClose, dayDate }) {
             setAppointments(transformedAppointments);
         } catch (error) {
             console.error("Error fetching appointments:", error);
+        } finally{
+            setIsLoading(false);
         }
+      
     }
     
     async function fetchNotes() {
+        setIsLoading(true);
         try {
             const response = await fetch(`http://localhost:8080/api/v1/notes/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
             if (!response.ok) {
@@ -47,28 +53,34 @@ function DayModal({ onDayClose, dayDate }) {
         } catch (error) {
             console.error("Error fetching notes:", error);
         }
-        
+        finally{
+            setIsLoading(false);
+        }
     }
 
     return (
-        <div className={classes.modal}>
-            <button onClick={onDayClose} className={classes.close}>&times;</button>
-            <h1 className={classes.title}>Overview </h1>
-            <h3>Current Appointments:  </h3>
-            <ul>
-                {appointments.map(a => {
-                    return (
-                        <li>
-                            <p>🕔{format(a.date, 'HH:mm')} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
-                        </li>
-                    );
-                })}
-            </ul>
-            <h3>Current Notes:  </h3>
-            <ul>
-                {notes.map(n => <li>{n.text}</li>)}
-            </ul>
-        </div>
+        <>
+        {isLoading ? <p> Loading... </p> : <div className={classes.modal}>
+        <button onClick={onDayClose} className={classes.close}>&times;</button>
+        <h1 className={classes.title}>Overview </h1>
+        <h3>Current Appointments:  </h3>
+        <ul>
+            {appointments.map(a => {
+                return (
+                    <li>
+                        <p>🕔{format(a.date, 'HH:mm')} 🌍{a.activity}  🙆‍♂️{a.partner}</p>
+                    </li>
+                );
+            })}
+        </ul>
+        <h3>Current Notes:  </h3>
+        <ul>
+            {notes.map(n => <li>{n.text}</li>)}
+        </ul>
+    </div>}
+        </>
+        
+        
     );
 }
 export default DayModal;

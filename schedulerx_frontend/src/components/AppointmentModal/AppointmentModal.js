@@ -9,7 +9,7 @@ function AppointmentModal({ onAppointmentClose, dayDate}) {
     const [partner, setPartner] = useState("");
     const [appointments, setAppointments] = useState([]);
 
-    useEffect(() => fetchAppointments,[]);
+    useEffect(() => {fetchAppointments()},[]);
 
     async function fetchAppointments() {
         try {

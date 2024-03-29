@@ -4,10 +4,12 @@ import { format } from "date-fns";
 
 function NoteModal({ onNoteClose, dayDate}) {
 
+    const formattedDate = format(dayDate, "yyyy-MM-dd'T'HH:mm");
+
     const [note, setNote] = useState("")
     const [notes, setNotes] = useState([]);
     
-    useEffect(() => fetchNotes, []);
+    useEffect(() => {fetchNotes()}, []);
 
     async function fetchNotes() {
         try {
@@ -29,10 +31,6 @@ function NoteModal({ onNoteClose, dayDate}) {
        
         
     }
-
-    
-    const formattedDate = format(dayDate, "yyyy-MM-dd'T'HH:mm");
-
 
     async function handleSubmit(e) {
         e.preventDefault();
