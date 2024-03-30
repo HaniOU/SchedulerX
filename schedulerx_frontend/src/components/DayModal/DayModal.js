@@ -12,8 +12,21 @@ function DayModal({ onDayClose, dayDate }) {
         fetchNotes();
     }, []);
 
+    useEffect(()=>{
+        function escape(e){
+            if(e.code==="Escape"){
+                onDayClose();
+            }
+        }
+        document.addEventListener("keydown", escape);
+
+        return function(){
+            document.removeEventListener("keydown", escape);
+        }
+    },[onDayClose]);
+
     async function fetchAppointments() {
-        setIsLoading(true);
+       // setIsLoading(true);
         try {
             const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
             if (!response.ok) {
@@ -30,13 +43,13 @@ function DayModal({ onDayClose, dayDate }) {
         } catch (error) {
             console.error("Error fetching appointments:", error);
         } finally{
-            setIsLoading(false);
+       //     setIsLoading(false);
         }
       
     }
     
     async function fetchNotes() {
-        setIsLoading(true);
+      //  setIsLoading(true);
         try {
             const response = await fetch(`http://localhost:8080/api/v1/notes/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
             if (!response.ok) {
@@ -54,7 +67,7 @@ function DayModal({ onDayClose, dayDate }) {
             console.error("Error fetching notes:", error);
         }
         finally{
-            setIsLoading(false);
+     //       setIsLoading(false);
         }
     }
 

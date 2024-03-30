@@ -10,6 +10,18 @@ function NoteModal({ onNoteClose, dayDate}) {
     const [notes, setNotes] = useState([]);
     
     useEffect(() => {fetchNotes()}, []);
+    useEffect(()=>{
+        function escape(e){
+            if(e.code==="Escape"){
+                onNoteClose();
+            }
+        }
+        document.addEventListener("keydown", escape);
+
+        return function(){
+            document.removeEventListener("keydown", escape);
+        }
+    },[onNoteClose]);
 
     async function fetchNotes() {
         try {

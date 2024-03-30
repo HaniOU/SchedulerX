@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./AppointmentModal.module.css"
-import { addHours, format, setHours, setMinutes } from "date-fns";
+import {  format } from "date-fns";
 
 function AppointmentModal({ onAppointmentClose, dayDate}) {
 
@@ -10,6 +10,19 @@ function AppointmentModal({ onAppointmentClose, dayDate}) {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {fetchAppointments()},[]);
+
+    useEffect(()=>{
+        function escape(e){
+            if(e.code==="Escape"){
+                onAppointmentClose();
+            }
+        }
+        document.addEventListener("keydown", escape);
+
+        return function(){
+            document.removeEventListener("keydown", escape);
+        }
+    },[onAppointmentClose]);
 
     async function fetchAppointments() {
         try {
