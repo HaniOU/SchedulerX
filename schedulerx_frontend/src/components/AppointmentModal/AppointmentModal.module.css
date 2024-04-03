@@ -6,7 +6,7 @@
     height: 700px;
     transform: translate(-50%, -50%);
     width: 70%;
-    background-color: rgb(74, 1, 1);
+    background-color: rgb(77, 24, 127);
     padding: 80px;
     padding-top: 120px;
     border-radius: 60px;
@@ -31,3 +31,20 @@
     transform: translateX(-50%);
     font-size: 50px;
   }
+  .delete {
+    position: absolute;
+    right: 13%;
+    border-radius: 30%;
+    font-size: 22px;
+ 
+    
+  }
+  .appointments{
+    font-size: 19px;
+  }
+  .appointmentContent {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
