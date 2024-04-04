@@ -65,7 +65,7 @@ function DayModal({ onDayClose, dayDate }) {
         }
         fetchAppointments();
         fetchNotes();
-    }, []);
+    }, [dayDate]);
 
     useEffect(() => {
         function escape(e) {

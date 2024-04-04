@@ -62,25 +62,24 @@ function NoteModal({ onNoteClose, dayDate }) {
             text: note
         };
 
-        /*  try {
-              const response = await fetch("http://localhost:8080/api/v1/addNote", {
-                  method: "POST",
-                  headers: {
-                      "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify(newNote)
-              });
-  
-              if (!response.ok) {
-                  throw new Error("Network response was not ok");
-              }
-              setNotes(prevNotes => [...prevNotes, newNote]);
-              console.log("Note added successfully");
-  
-          } catch (error) {
-              console.error("Error adding note:", error);
-          }*/
-        setNotes(prevNotes => [...prevNotes, newNote]);
+        try {
+            const response = await fetch("http://localhost:8080/api/v1/addNote", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newNote)
+            });
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            setNotes(prevNotes => [...prevNotes, newNote]);
+            console.log("Note added successfully");
+
+        } catch (error) {
+            console.error("Error adding note:", error);
+        }
         setNote("");
     }
 
