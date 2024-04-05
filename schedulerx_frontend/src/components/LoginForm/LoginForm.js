@@ -8,21 +8,15 @@ function LoginForm({ verifyAuthentification }) {
   const [errorLogin, setErrorLogin] = useState(false)
   const navigate = useNavigate();
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
   function handleSubmit(event){
     event.preventDefault();
     if (username === "hani" && password === "123"){
       verifyAuthentification();
       navigate('/calendar'); 
     }
+    setUsername("");
+    setPassword("");
     setErrorLogin(true)
-    
   }
  
 
@@ -35,7 +29,7 @@ function LoginForm({ verifyAuthentification }) {
             type="text"
             id="username"
             value={username}
-            onChange={handleUsernameChange}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
@@ -45,7 +39,7 @@ function LoginForm({ verifyAuthentification }) {
             type="password"
             id="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
