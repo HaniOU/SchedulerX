@@ -8,5 +8,5 @@ services:
       - ./data:/var/lib/postgresql/data
     environment:
       - "POSTGRES_DB=schedulerx"
-      - "POSTGRES_USER=hani"
+      - "POSTGRES_USER=${DB_ID}"
       - "POSTGRES_PASSWORD=${DB_SECRET}"
