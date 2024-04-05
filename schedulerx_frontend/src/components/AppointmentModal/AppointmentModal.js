@@ -17,7 +17,8 @@ function AppointmentModal({ onAppointmentClose, dayDate }) {
     useEffect(() => {
         async function fetchAppointments() {
             try {
-                const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+                const response = await fetch(`http://localhost:8080/api/v1/appointments/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`,
+                {credentials: 'include'});
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }

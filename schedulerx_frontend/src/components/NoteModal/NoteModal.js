@@ -17,9 +17,13 @@ function NoteModal({ onNoteClose, dayDate }) {
     useEffect(() => {
         async function fetchNotes() {
             try {
-                const response = await fetch(`http://localhost:8080/api/v1/notes/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`);
+                const response = await fetch(`http://localhost:8080/api/v1/notes/${format(dayDate, "yyyy-MM-dd'T'HH:mm")}`,
+                    {credentials: 'include'});
+
+
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
+
                 }
                 const data = await response.json();
 
