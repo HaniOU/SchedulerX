@@ -1,65 +1,90 @@
 package de.schedulerx_backend.infrastructure.security;
 
 
-
+import de.schedulerx_backend.applicationservice.SchedulerService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
-    @EnableMethodSecurity(securedEnabled = true)
-    public class SecurityConfig {
-        @Bean
-        public SecurityFilterChain config(HttpSecurity chainBuilder) throws Exception {
+@EnableMethodSecurity(securedEnabled = true)
+public class SecurityConfig {
+    private JWTAuthFilter jwtAuthFilter;
+    private CustomUserDetailService customUserDetailService;
 
+    public SecurityConfig(JWTAuthFilter jwtAuthFilter, CustomUserDetailService customUserDetailService) {
+        this.jwtAuthFilter = jwtAuthFilter;
+        this.customUserDetailService = customUserDetailService;
+    }
 
-            chainBuilder
-                    .csrf(c->c.disable())
-                    .cors(c->c.configurationSource(cor()))
-                    .authorizeHttpRequests(
-                            configurer -> configurer
-                                    .requestMatchers("/login", "/oauth2/authorization/**")
-                                    .permitAll()
-                                    .anyRequest()
-                                    .authenticated()
-                    )
-                    .formLogin(
-                            form -> form
-                                    .loginPage("http://localhost:3000")
-                                    .permitAll()
-                    )
-                    .oauth2Login(
-                            oauth2->{
-                                oauth2.loginPage("http://localhost:3000");
-                                oauth2.defaultSuccessUrl("http://localhost:3000/calendar");
-                            }
-                    );
-
-            return chainBuilder.build();
-        }
     @Bean
-    public CorsConfigurationSource cor() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-       corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3000/calendar"));
+    public SecurityFilterChain config(HttpSecurity chainBuilder) throws Exception {
+        chainBuilder.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-
-        corsConfiguration.addAllowedMethod("*");
-        corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration);
-
-        return source;
+        chainBuilder
+                .formLogin(AbstractHttpConfigurer::disable)
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(
+                        configurer -> configurer
+                                .requestMatchers("/login", "/oauth2/authorization/**", "/auth/v1/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        return chainBuilder.build();
+    }
+    private CorsConfigurationSource corsConfigurationSource() {
+        return new CorsConfigurationSource() {
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                CorsConfiguration ccfg = new CorsConfiguration();
+                ccfg.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+                ccfg.setAllowedMethods(Collections.singletonList("*"));
+                ccfg.setAllowCredentials(true);
+                ccfg.setAllowedHeaders(Collections.singletonList("*"));
+                ccfg.setExposedHeaders(Arrays.asList("Authorization"));
+                ccfg.setMaxAge(3600L);
+                return ccfg;
+            }
+        };
+    }
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(customUserDetailService);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(daoAuthenticationProvider);
     }
 
 }
