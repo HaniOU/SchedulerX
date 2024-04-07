@@ -1,4 +1,7 @@
 spring:
+  secure:
+    jwt:
+      secret-key: hhhh
   main:
     banner-mode: off
   datasource:
