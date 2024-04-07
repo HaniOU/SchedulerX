@@ -13,14 +13,20 @@ function RegisterModal({onRegisterClose}){
             document.removeEventListener("keydown", escape);
         }
     }, [onRegisterClose]);
-
-    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
     const [err, setErr] = useState("")
 
     async function handleSubmit(event){
         event.preventDefault();
+        if (password != password2) {
+            setErr("Password confirmation failed.Please ensure that the password and confirmation password match")
+         
+            setPassword("");
+            setPassword2("");
+            return;
+        }
         const newUser = {username: username, password: password}
         try {
             const response = await fetch("http://localhost:8080/auth/v1/registration", {
@@ -37,26 +43,16 @@ function RegisterModal({onRegisterClose}){
             }
             onRegisterClose();
         } catch (error) {
-            setEmail("");
             setUsername("");
             setPassword("");
-            setErr(error)        }
+            setPassword2("");
+            setErr(error.message)        }
     }
     return(
         <div className={classes.modal}>
             <button onClick={onRegisterClose} className={classes.close}>&times;</button>
             <h1 className={classes.title}>Registration</h1>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="text"
-                        id="email"
-                        value={email}
-                        onChange={(e)=> setEmail(e.target.value)}
-                        required
-                    />
-                </div>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -74,6 +70,16 @@ function RegisterModal({onRegisterClose}){
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password2">Password:</label>
+                    <input
+                        type="password"
+                        id="password2"
+                        value={password2}
+                        onChange={(e) => setPassword2(e.target.value)}
                         required
                     />
                 </div>

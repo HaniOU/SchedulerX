@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Ignore PostgreSQL data directory
+/data/
+
+# Ignore PostgreSQL log files
+*.log

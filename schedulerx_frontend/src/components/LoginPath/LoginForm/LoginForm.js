@@ -7,7 +7,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errorLogin, setErrorLogin] = useState("")
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -41,7 +41,7 @@ function LoginForm() {
     } catch (error) {
       setUsername("");
       setPassword("");
-      setErrorLogin(error)
+      setErrorLogin(error.message);
     }
     
   }

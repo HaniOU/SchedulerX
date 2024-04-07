@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignore PostgreSQL data directory
+/data/
+
+# Ignore PostgreSQL log files
+*.log
