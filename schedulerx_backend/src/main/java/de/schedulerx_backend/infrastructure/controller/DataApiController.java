@@ -1,11 +1,12 @@
 package de.schedulerx_backend.infrastructure.controller;
 
 import de.schedulerx_backend.applicationservice.SchedulerService;
-import de.schedulerx_backend.infrastructure.security.UserPrincipal;
+import de.schedulerx_backend.infrastructure.requestDTOs.AppointmentDTO;
+import de.schedulerx_backend.infrastructure.requestDTOs.NoteDTO;
+import de.schedulerx_backend.infrastructure.security.userprincipal.UserPrincipal;
 import de.schedulerx_backend.model.appointmentAggregat.Appointment;
 import de.schedulerx_backend.model.noteAggregat.Note;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +17,11 @@ import java.util.List;
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
 
-public class SchedulerDataController {
+public class DataApiController {
     //http://localhost:8080/api/v1/appointments/2024-03-22T10:00:00
     private SchedulerService service;
 
-    public SchedulerDataController(SchedulerService service) {
+    public DataApiController(SchedulerService service) {
         this.service = service;
     }
 

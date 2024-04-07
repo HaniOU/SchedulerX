@@ -1,4 +1,4 @@
-package de.schedulerx_backend.infrastructure.controller;
+package de.schedulerx_backend.infrastructure.requestDTOs;
 
 import java.time.LocalDateTime;
 

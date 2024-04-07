@@ -1,7 +1,4 @@
 spring:
-  secure:
-    jwt:
-      secret-key: hhhh
   main:
     banner-mode: off
   datasource:
@@ -9,6 +6,8 @@ spring:
     password: ${DB_SECRET}
     url: jdbc:postgresql://localhost:5432/schedulerx
   security:
+    jwt:
+      secret-key: verysecretkeyohsosecretdamnhowlongisthispleasedontusethisinproduction
     oauth2:
       client:
         registration:

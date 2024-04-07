@@ -1,4 +1,4 @@
-package de.schedulerx_backend.infrastructure.security;
+package de.schedulerx_backend.infrastructure.security.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -10,10 +10,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Component
-public class JWTProvider {
-    private JWTProperties jwtProperties;
+public class JwtProvider {
+    private JwtProperties jwtProperties;
 
-    public JWTProvider(JWTProperties jwtProperties) {
+    public JwtProvider(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
     }
 
@@ -23,6 +23,6 @@ public class JWTProvider {
                 .withExpiresAt(Instant.now().plus(Duration.of(1, ChronoUnit.DAYS)))
                 .withClaim("username", username)
                 .withClaim("roles", roles)
-                .sign(Algorithm.HMAC256("secret"));
+                .sign(Algorithm.HMAC256(jwtProperties.getSecretKey()));
     }
 }

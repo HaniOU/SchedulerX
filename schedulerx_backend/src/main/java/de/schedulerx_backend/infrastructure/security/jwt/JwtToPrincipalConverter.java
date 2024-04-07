@@ -1,16 +1,15 @@
-package de.schedulerx_backend.infrastructure.security;
+package de.schedulerx_backend.infrastructure.security.jwt;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.sun.jdi.IntegerValue;
+import de.schedulerx_backend.infrastructure.security.userprincipal.UserPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 
 @Component
-public class JWTToPrincipalConverter {
+public class JwtToPrincipalConverter {
     public UserPrincipal convert(DecodedJWT jwt){
 
         return new UserPrincipal(

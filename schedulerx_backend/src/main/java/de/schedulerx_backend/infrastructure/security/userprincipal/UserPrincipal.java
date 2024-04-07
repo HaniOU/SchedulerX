@@ -1,4 +1,4 @@
-package de.schedulerx_backend.infrastructure.security;
+package de.schedulerx_backend.infrastructure.security.userprincipal;
 
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package de.schedulerx_backend.infrastructure.controller;
+package de.schedulerx_backend.infrastructure.requestDTOs;
 
 public class UserRequest {
     private String username;

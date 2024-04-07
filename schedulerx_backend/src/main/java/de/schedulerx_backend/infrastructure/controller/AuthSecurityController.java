@@ -1,10 +1,9 @@
 package de.schedulerx_backend.infrastructure.controller;
 
 import de.schedulerx_backend.applicationservice.SchedulerService;
-import de.schedulerx_backend.infrastructure.security.JWTProvider;
-import de.schedulerx_backend.infrastructure.security.UserPrincipal;
-import de.schedulerx_backend.model.schedulerUserAggregat.SchedulerUser;
-import org.springframework.http.HttpStatus;
+import de.schedulerx_backend.infrastructure.requestDTOs.UserRequest;
+import de.schedulerx_backend.infrastructure.security.jwt.JwtProvider;
+import de.schedulerx_backend.infrastructure.security.userprincipal.UserPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,18 +14,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/auth/v1")
-public class SchedulerSecurityController {
-    private final JWTProvider jwtProvider;
+public class AuthSecurityController {
+    private final JwtProvider jwtProvider;
     private final SchedulerService service;
     private final AuthenticationManager authenticationManager;
 
-    public SchedulerSecurityController(SchedulerService service ,AuthenticationManager authenticationManager, JWTProvider jwtProvider) {
+    public AuthSecurityController(SchedulerService service , AuthenticationManager authenticationManager, JwtProvider jwtProvider) {
         this.service = service;
         this.authenticationManager = authenticationManager;
         this.jwtProvider = jwtProvider;

@@ -1,5 +1,6 @@
-package de.schedulerx_backend.infrastructure.security;
+package de.schedulerx_backend.infrastructure.security.jwt;
 
+import de.schedulerx_backend.infrastructure.security.userprincipal.UserPrincipalAuthToken;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,16 +10,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class JWTAuthFilter extends OncePerRequestFilter {
-    private JWTDecoder jwtDecoder;
-    private JWTToPrincipalConverter jwtToPrincipalConverter;
+public class JwtAuthFilter extends OncePerRequestFilter {
+    private JwtDecoder jwtDecoder;
+    private JwtToPrincipalConverter jwtToPrincipalConverter;
 
-    public JWTAuthFilter(JWTDecoder jwtDecoder, JWTToPrincipalConverter jwtToPrincipalConverter) {
+    public JwtAuthFilter(JwtDecoder jwtDecoder, JwtToPrincipalConverter jwtToPrincipalConverter) {
         this.jwtDecoder = jwtDecoder;
         this.jwtToPrincipalConverter = jwtToPrincipalConverter;
     }
