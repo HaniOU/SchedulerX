@@ -1,18 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Login/Login";
-import Introduction from "./components/Introduction/Introduction";
-import { Home } from "./components/Home/Home";
+import Introduction from "./components/IntroductionPath/Introduction/Introduction";
+import  Home  from "./components/HomePath/Home/Home";
 import { useState } from "react";
+import Login from "./components/LoginPath/Login/Login";
 
 function App() {
-  const[isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Introduction/>} /> 
-          <Route path="/login" element={<Login verifyAuthentification = {() => setIsAuthenticated(true)}/>}/>
-          <Route path="/calendar" element={<Home isAuthenticated={isAuthenticated}/>}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/calendar" element={<Home />}/>
       </Routes>
       </BrowserRouter>
 
