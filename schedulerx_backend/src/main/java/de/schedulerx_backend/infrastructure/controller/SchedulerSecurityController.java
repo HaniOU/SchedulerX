@@ -35,7 +35,8 @@ public class SchedulerSecurityController {
     @PostMapping("/registration")
     public ResponseEntity<String> registration(@RequestBody UserRequest user) {
         boolean successful = service.createUser(user);
-        if (!successful) return ResponseEntity.status(400).body("Username "+ user.getUsername() + " already exists");
+        if (!successful)
+            return ResponseEntity.status(400).body("Username "+ user.getUsername() + " already exists");
         return ResponseEntity.ok().body("new user added successfully");
     }
 
@@ -51,7 +52,11 @@ public class SchedulerSecurityController {
                             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-            List<String> roles = userPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+            List<String> roles = userPrincipal
+                    .getAuthorities()
+                    .stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
             String token = jwtProvider.generateToken(userPrincipal.getId(), userPrincipal.getUsername(), roles);
             return ResponseEntity.status(200).body(token);
         } catch (AuthenticationException e) {

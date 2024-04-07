@@ -1,0 +1,36 @@
+.headContainer {
+    position: relative;
+    height: 170px;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 40px;
+
+}
+
+.greet {
+    position: absolute;
+    left: 0;
+    margin:0;
+    padding-top: 60px;
+    padding-left: 300px;
+}
+
+.time {
+    position: absolute;
+    right: 0;
+    margin:0;
+    padding-top: 60px;
+    padding-right: 300px;
+}
+
+.logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

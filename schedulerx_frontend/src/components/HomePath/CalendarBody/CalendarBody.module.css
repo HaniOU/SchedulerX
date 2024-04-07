@@ -1,0 +1,13 @@
+.calendarContainer {
+  height: 50rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0;
+  margin:0;
+  border: 3px solid hsl(232.7, 27.3%, 23.7%);
+}
+
+.day {
+  position: relative;
+  border: hsl(232.7, 27.3%, 23.7%) 3px solid;
+}
