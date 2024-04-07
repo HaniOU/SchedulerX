@@ -20,7 +20,7 @@ function RegisterModal({onRegisterClose}){
 
     async function handleSubmit(event){
         event.preventDefault();
-        if (password != password2) {
+        if (password !== password2) {
             setErr("Password confirmation failed.Please ensure that the password and confirmation password match")
          
             setPassword("");
@@ -74,7 +74,7 @@ function RegisterModal({onRegisterClose}){
                     />
                 </div>
                 <div>
-                    <label htmlFor="password2">Password:</label>
+                    <label htmlFor="password2">Confirm Password:</label>
                     <input
                         type="password"
                         id="password2"
@@ -83,7 +83,7 @@ function RegisterModal({onRegisterClose}){
                         required
                     />
                 </div>
-                <button type="submit">Confirm</button>
+                <button type="submit">Submit</button>
             </form>
             {err && <h2>{err}</h2>}
         </div>
