@@ -42,7 +42,7 @@ function LoginForm() {
       }
       const jwt = await response.text();
       localStorage.setItem('jwt', jwt);
-      navigate("/calendar");
+      navigate("/");
 
     } catch (error) {
       setUsername("");

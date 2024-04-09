@@ -1,50 +1,53 @@
 .modal {
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 700px;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    background-color: rgb(77, 24, 127);
-    padding: 80px;
-    padding-top: 120px;
-    border-radius: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 700px;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: rgb(18, 18, 66);
+  padding: 80px;
+  padding-top: 120px;
+  border-radius: 60px;
 }
+
 .close {
-    position: absolute;
-    top:0;
-    right: 0;
-    cursor: pointer;
-    font-size: 100px;
-    padding-top: 0;
-    padding-right: 25px;
-    color: white;
-    border: transparent;
-    background-color: transparent;
-  }
-
-  .title{
-    position: absolute;
-    top:0;
-    left:50%;
-    transform: translateX(-50%);
-    font-size: 50px;
-  }
-  .delete {
-    position: absolute;
-    right: 13%;
-    border-radius: 30%;
-    font-size: 22px;
- 
-    
-  }
-  .appointments{
-    font-size: 19px;
-  }
-  .appointmentContent {
-    display: flex;
-    align-items: center;
-    height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  font-size: 100px;
+  padding-top: 0;
+  padding-right: 25px;
+  color: white;
+  border: transparent;
+  background-color: transparent;
 }
 
+.title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 50px;
+}
+
+.delete {
+  position: absolute;
+  right: 13%;
+  border-radius: 30%;
+  font-size: 22px;
+
+
+}
+
+.appointments {
+  font-size: 19px;
+}
+
+.appointmentContent {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}

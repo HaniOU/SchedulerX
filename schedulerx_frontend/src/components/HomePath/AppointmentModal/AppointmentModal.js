@@ -30,7 +30,7 @@ function AppointmentModal({ onAppointmentClose, dayDate }) {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
-
+                
                 const transformedAppointments = data.map(appointment => ({
                     ...appointment,
                     date: new Date(appointment.date)
