@@ -51,7 +51,12 @@ function LoginForm() {
     }
 
   }
-
+  function handleRegisterClose(){
+    setErrorLogin("");
+    setUsername("");
+    setPassword("");
+    setShowRegisterModal(false)
+  }
   /*<>
         <form onSubmit={handleSubmit}>
           <div>
@@ -117,7 +122,7 @@ function LoginForm() {
     </div>
     {showRegisterModal &&
       ReactDOM.createPortal(<div>
-        <RegisterModal onRegisterClose={() => setShowRegisterModal(false)} />
+        <RegisterModal onRegisterClose={handleRegisterClose} />
       </div>, document.body
       )}
   </>
