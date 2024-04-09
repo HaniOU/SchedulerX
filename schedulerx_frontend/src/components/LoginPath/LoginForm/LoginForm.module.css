@@ -1,45 +1,10 @@
-/*.modal {
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 700px;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    background-color: rgb(77, 24, 127);
-    padding: 80px;
-    padding-top: 120px;
-    border-radius: 60px;
-}
-
-
-.title {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 50px;
-} */
-.close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    font-size: 100px;
-    padding-top: 0;
-    padding-right: 25px;
-    color: black;
-    border: transparent;
-    background-color: transparent;
-}
-
 .center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px;
-    height: 550px;
+    width: 500px;
+
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
@@ -109,7 +74,15 @@ form .txt_field {
     width: 100%;
 }
 
+.pass {
+    margin: -5px 0 20px 5px;
+    color: #a6a6a6;
+    cursor: pointer;
+}
 
+.pass:hover {
+    text-decoration: underline;
+}
 
 .login {
     width: 100%;
@@ -129,7 +102,25 @@ form .txt_field {
     transition: .5s;
 }
 
+.signup_link {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
 
+.signup_link button {
+    color: #2691d9;
+    text-decoration: none;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    font-size: 17.3px;
+}
+
+.signup_link a:hover {
+    text-decoration: underline;
+}
 .errorMessage {
     color: red;
     text-align: center;

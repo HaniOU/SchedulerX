@@ -14,7 +14,7 @@ function Calendar() {
     useEffect(() => {
         setLoggedIn(jwt && true);
     }, [jwt])
-
+    
     const [currentDate, setCurrentDate] = useState(startOfToday());
 
     //setCurrentDate muss auch automatisch für neuen Monat getriggert werden!
