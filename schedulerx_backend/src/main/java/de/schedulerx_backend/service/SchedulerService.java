@@ -1,4 +1,4 @@
-package de.schedulerx_backend.applicationservice;
+package de.schedulerx_backend.service;
 
 import de.schedulerx_backend.database.AppointmentRepository;
 import de.schedulerx_backend.database.NoteRepository;

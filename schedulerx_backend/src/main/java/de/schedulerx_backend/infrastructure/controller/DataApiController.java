@@ -1,6 +1,6 @@
 package de.schedulerx_backend.infrastructure.controller;
 
-import de.schedulerx_backend.applicationservice.SchedulerService;
+import de.schedulerx_backend.service.SchedulerService;
 import de.schedulerx_backend.infrastructure.requestDTOs.AppointmentDTO;
 import de.schedulerx_backend.infrastructure.requestDTOs.NoteDTO;
 import de.schedulerx_backend.infrastructure.security.userprincipal.UserPrincipal;
@@ -57,8 +57,4 @@ public class DataApiController {
         service.saveNote(noteDTO, userPrincipal.getId());
     }
 
-    @GetMapping
-    public String greet(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        return "hi " + userPrincipal.getUsername() + " ID: " + userPrincipal.getId();
-    }
 }

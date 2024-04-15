@@ -1,6 +1,6 @@
 package de.schedulerx_backend.infrastructure.security;
 
-import de.schedulerx_backend.applicationservice.SchedulerService;
+import de.schedulerx_backend.service.SchedulerService;
 import de.schedulerx_backend.infrastructure.security.userprincipal.UserPrincipal;
 import de.schedulerx_backend.model.schedulerUserAggregat.SchedulerUser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
